@@ -6,7 +6,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.all('/proxy', (req, res) => {
+app.all('/proxy', cors(), (req, res) => {
     // get the target URL from the query parameter
     const targetUrl = req.query.url;
 
@@ -26,12 +26,7 @@ app.all('/proxy', (req, res) => {
         url: targetUrl,
         method: req.method,
         json: req.body,
-        headers: {
-            ...req.headers,
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET, POST',
-            'Access-Control-Allow-Headers': 'Content-Type, Authorization'
-        }
+        headers: req.headers
     });
 
     // add the necessary CORS headers to the response
