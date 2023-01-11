@@ -10,6 +10,17 @@ app.all('/proxy', (req, res) => {
     // get the target URL from the query parameter
     const targetUrl = req.query.url;
 
+    console.log(req.query);
+    console.log('req.query');
+    console.log(targetUrl);
+    console.log('targetUrl');
+    console.log(req.method);
+    console.log('req.method');
+    console.log(req.body);
+    console.log('req.body');
+    console.log(req.headers);
+    console.log('req.headers');
+
     // forward the incoming request to the target server
     const proxy = request({
         url: targetUrl,
