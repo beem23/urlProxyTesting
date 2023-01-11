@@ -26,13 +26,18 @@ app.all('/proxy', (req, res) => {
         url: targetUrl,
         method: req.method,
         json: req.body,
-        headers: req.headers
+        headers: {
+            ...req.headers,
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+        }
     });
 
     // add the necessary CORS headers to the response
-    res.set('Access-Control-Allow-Origin', '*');
-    res.set('Access-Control-Allow-Methods', 'GET, POST');
-    res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    // res.set('Access-Control-Allow-Origin', '*');
+    // res.set('Access-Control-Allow-Methods', 'GET, POST');
+    // res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
     // pipe the response back to the client
     req.pipe(proxy).pipe(res);
