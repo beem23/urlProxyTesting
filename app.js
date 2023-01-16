@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
         url: `https://www.virustotal.com/api/v3/urls/${url}`,
         headers: {
             accept: 'application/json',
-            'x-apikey': API_KEY
+            'x-apikey': process.env.API_KEY
         }
     };
 
@@ -38,7 +38,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
     const url = "https://www.virustotal.com/api/v3/files";
     const headers = {
         accept: "application/json",
-        "x-apikey": API_KEY
+        "x-apikey": process.env.API_KEY
     };
     const formData = {
         file: {
@@ -66,7 +66,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
             method: 'GET',
             headers: {
                 accept: 'application/json',
-                'x-apikey': API_KEY
+                'x-apikey': process.env.API_KEY
             }
         };
         request(options, (error, response, body) => {
@@ -85,7 +85,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
             method: 'GET',
             headers: {
                 accept: 'application/json',
-                'x-apikey': API_KEY
+                'x-apikey': process.env.API_KEY
             }
         };
         request(options, (error, response, body) => {
