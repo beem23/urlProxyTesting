@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors');
 const request = require('request');
 const multer = require('multer');
+require('dotenv').config();
 
 app.use(cors());
 app.use(express.json());
@@ -17,7 +18,7 @@ app.get('/', (req, res) => {
         url: `https://www.virustotal.com/api/v3/urls/${url}`,
         headers: {
             accept: 'application/json',
-            'x-apikey': '82b15e23cacae9e3a10c94671ae01354316c38b18979f3aeeaef5b1d71b43ed1'
+            'x-apikey': API_KEY
         }
     };
 
@@ -37,7 +38,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
     const url = "https://www.virustotal.com/api/v3/files";
     const headers = {
         accept: "application/json",
-        "x-apikey": '82b15e23cacae9e3a10c94671ae01354316c38b18979f3aeeaef5b1d71b43ed1'
+        "x-apikey": API_KEY
     };
     const formData = {
         file: {
@@ -65,7 +66,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
             method: 'GET',
             headers: {
                 accept: 'application/json',
-                'x-apikey': '82b15e23cacae9e3a10c94671ae01354316c38b18979f3aeeaef5b1d71b43ed1'
+                'x-apikey': API_KEY
             }
         };
         request(options, (error, response, body) => {
@@ -84,7 +85,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
             method: 'GET',
             headers: {
                 accept: 'application/json',
-                'x-apikey': '82b15e23cacae9e3a10c94671ae01354316c38b18979f3aeeaef5b1d71b43ed1'
+                'x-apikey': API_KEY
             }
         };
         request(options, (error, response, body) => {
