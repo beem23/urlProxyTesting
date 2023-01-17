@@ -4,9 +4,16 @@ const cors = require('cors');
 const request = require('request');
 const multer = require('multer');
 require('dotenv').config();
+const rateLimit = require("express-rate-limit");
 
 app.use(cors());
 app.use(express.json());
+
+app.use(rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+    message: "Too many requests, please try again later"
+}));
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
